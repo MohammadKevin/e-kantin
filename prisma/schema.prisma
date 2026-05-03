@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  super_admin
+  admin_stan
+  siswa
+}
+
+enum JenisMenu {
+  makanan
+  minuman
+}
+
+enum StatusTransaksi {
+  belum_dikonfirm
+  dimasak
+  diantar
+  sampai
+}
+
+enum StatusStan {
+  pending
+  diterima
+  ditolak
+}
+
+enum MetodePembayaran {
+  qris
+  cash
+}
+
+enum StatusPembayaran {
+  belum_bayar
+  menunggu_konfirmasi
+  dibayar
+}
+
+//////////////////////////////////////////////////
+// MODEL
+//////////////////////////////////////////////////
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  role     Role
+
+  siswa Siswa?
+  stan  Stan?
+}
+
+model Siswa {
+  id     Int     @id @default(autoincrement())
+  nama   String
+  alamat String
+  telp   String
+  foto   String?
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+
+  transaksi Transaksi[]
+}
+
+model Stan {
+  id           Int    @id @default(autoincrement())
+  nama_stan    String
+  nama_pemilik String
+  telp         String
+
+  status StatusStan @default(pending)
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+
+  menu      Menu[]
+  transaksi Transaksi[]
+}
+
+model Menu {
+  id        Int       @id @default(autoincrement())
+  nama      String
+  harga     Float
+  jenis     JenisMenu
+  foto      String?
+  deskripsi String?
+
+  stanId Int
+  stan   Stan @relation(fields: [stanId], references: [id])
+
+  detailTransaksi DetailTransaksi[]
+  menuDiskon      MenuDiskon[]
+}
+
+model Transaksi {
+  id      Int      @id @default(autoincrement())
+  tanggal DateTime @default(now())
+
+  status StatusTransaksi @default(belum_dikonfirm)
+
+  metode_pembayaran MetodePembayaran
+  status_pembayaran StatusPembayaran @default(belum_bayar)
+
+  total_harga Float
+
+  siswaId Int
+  stanId  Int
+
+  siswa Siswa @relation(fields: [siswaId], references: [id])
+  stan  Stan  @relation(fields: [stanId], references: [id])
+
+  detail DetailTransaksi[]
+}
+
+model DetailTransaksi {
+  id Int @id @default(autoincrement())
+
+  transaksiId Int
+  menuId      Int
+
+  qty        Int
+  harga_beli Float
+
+  transaksi Transaksi @relation(fields: [transaksiId], references: [id])
+  menu      Menu      @relation(fields: [menuId], references: [id])
+}
+
+model Diskon {
+  id                Int      @id @default(autoincrement())
+  nama_diskon       String
+  persentase_diskon Float
+  tanggal_awal      DateTime
+  tanggal_akhir     DateTime
+
+  menuDiskon MenuDiskon[]
+}
+
+model MenuDiskon {
+  id Int @id @default(autoincrement())
+
+  menuId   Int
+  diskonId Int
+
+  menu   Menu   @relation(fields: [menuId], references: [id])
+  diskon Diskon @relation(fields: [diskonId], references: [id])
+}
