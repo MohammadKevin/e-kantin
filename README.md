@@ -12,19 +12,19 @@
 
 ---
 
-## 📌 Overview
+## Overview
 NestJS backend system built to manage multi-stall school canteen menus, cashless orders, and daily transaction reconciliations.
 
 ---
 
-## ✨ Key Features
+## Key Features
 - Multi-vendor stall menu management and ordering queue
 - Order pickup notifications and cashier verification
 - Daily revenue reports per canteen vendor
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Framework**: NestJS
 - **Language**: TypeScript
 - **ORM**: Prisma ORM
@@ -32,7 +32,7 @@ NestJS backend system built to manage multi-stall school canteen menus, cashless
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```text
 e-kantin/
 ├── src/
@@ -44,7 +44,7 @@ e-kantin/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 Make sure you have the required runtimes and tools installed on your machine:
@@ -61,7 +61,7 @@ npm run start:dev
 
 ---
 
-## 👤 Author
+## Author
 **Mohammad Kevin Arif Rudianto**
 - **GitHub:** [@MohammadKevin](https://github.com/MohammadKevin)
 - **Portfolio:** [portfolio-mohammadkevin.vercel.app](https://portfolio-mohammadkevin.vercel.app)
@@ -70,9 +70,9 @@ npm run start:dev
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 <div align="center">
-⭐️ If you found this repository useful, please consider giving it a star!
+If you found this repository useful, please consider giving it a star!
 </div>
