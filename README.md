@@ -18,9 +18,9 @@ NestJS backend system built to manage multi-stall school canteen menus, cashless
 ---
 
 ## ✨ Key Features
-- ⚡ **Multi-vendor stall menu management and ordering queue**: Multi-vendor stall menu management and ordering queue
-- ⚡ **Order pickup notifications and cashier verification**: Order pickup notifications and cashier verification
-- ⚡ **Daily revenue reports per canteen vendor**: Daily revenue reports per canteen vendor
+- Multi-vendor stall menu management and ordering queue
+- Order pickup notifications and cashier verification
+- Daily revenue reports per canteen vendor
 
 ---
 
